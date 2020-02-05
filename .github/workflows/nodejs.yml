@@ -1,0 +1,24 @@
+name: Node.js CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js 12
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12
+    - run: npm install
+    - run: npm test
+      env:
+        CI: true
+    - name: Scope for Javascript
+      uses: undefinedlabs/scope-for-javascript-action@v1
+      with:
+        # Scope DSN
+        dsn: ${{secrets.SCOPE_DSN}} 
